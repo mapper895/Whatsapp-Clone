@@ -54,7 +54,12 @@ function Chat() {
 
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
-          <p>Last seen at ...</p>
+          <p>
+            last seen{" "}
+            {new Date(
+              messages[messages.length - 1]?.timestamp?.toDate()
+            ).toUTCString()}
+          </p>
         </div>
 
         <div className="chat__headerRight">
@@ -71,8 +76,9 @@ function Chat() {
       </div>
 
       <div className="chat__body">
-        {messages.map((message) => (
+        {messages.map((message, index) => (
           <p
+            key={index}
             className={`chat__message ${
               message.name === user.displayName && "chat__reciever"
             }`}
